@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+    <title>FreecodeCamp Forum Page</title>
+</head>
+<body>
+    <div class="container" >
+        <div class="header" >
+            <p class="list" >#</p>
+            <p class="topic" >Topic</p>
+            <p class="replies" >Replies</p>
+            <p class="views" >Views</p>
+            <p class="activity"  >Activity</p>
+        </div>
+        <div class="content" >
+        <ol id="items">
+           
+        </ol>
+        </div>
+    </div>
+   
+    <script>
+    
+    fetch('https://forum-proxy.freecodecamp.rocks/latest')
+  .then(response => response.json())
+  .then(data => {
+    const userIds = data.users.map(user => user.id);
+    
+    const topics = data.topic_list.topics.map(topic => {
+      const topicUser = data.users.find(user => user.id === topic.posters[0].user_id);
+      const hrs = new Date(topic.last_posted_at).getHours()
+      return {
+        title: topic.title,
+        user: topicUser,
+        views: topic.views,
+        replies: topic.reply_count,
+        last_seen: hrs + 'hr'
+      };
+    });
+    console.log(topics)
+    const olElement = document.getElementById('items'); // Get the <ol> element
+    const liElements = topics.map(topic => {
+      const url = topic.title.toLowerCase().split(/[-\s]+/).join('-')
+      
+    const li = document.createElement('li'); // Create an <li> element for each topic
+      li.innerHTML = `<a href="https://forum.freecodecamp.org/t/${encodeURIComponent(url)}" 
+      target="_blank"
+      >${topic.title}</a> 
+                      <img src="${topic.user.avatar_template.replace('{size}', '32')}" />
+                      <span class="info" >   
+                        ${topic.replies} | ${topic.views} | ${topic.last_seen}
+                        </span>`; // Display topic title, username, avatar, views, and activity
+    li.classList.add('topic-item');  
+    return li;
+    });
+
+    liElements.forEach(li => {
+      olElement.appendChild(li); // Append each <li> to the <ol>
+    });
+  });
+
+
+
+
+
+    </script>
+
+
+</body>
+</html>
