@@ -1,48 +1,46 @@
+/* Base styles */
 body {
-    margin: 0;
-    padding: 0;
-    font-family: "Montserrat", sans-serif;
-    background-color: #ACBFAC;
-  }
-
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+  background-color: #acbfac;
+}
 
 .header {
-	display: flex;
+  display: flex;
   border-bottom: 3px solid #f0f0f0;
-	text-align: center;
+  text-align: center;
   margin-bottom: 1em;
   padding-bottom: 0.5em;
   color: #f0f0f0;
   margin: 0 30px;
 }
 
- .header :nth-child(1){
-    margin-left: 20px;
+.header :nth-child(1){
+  margin-left: 20px;
 }
 
 .header :nth-child(2){
-  margin-left: 30px;
+margin-left: 30px;
 }
 
 
 .header :nth-child(3){
-  margin-left: 700px;
+margin-left: 700px;
 }
 
 .header :nth-child(4){
-  margin-left: 20px;
+margin-left: 20px;
 }
 
 .header :nth-child(5){
-  margin-left: 20px;
+margin-left: 20px;
 }
 
-
-.container{
-  margin: auto 150px;
-  display: block;
-  justify-content: center;
-  align-items: center;
+.container {
+  margin: auto;
+  max-width: 1200px; /* Limit container width for responsiveness */
+  padding: 0 15px; /* Add some space on the sides */
 }
 
 /* Style for the <li> element */
@@ -51,7 +49,7 @@ body {
   border-radius: 10px;
   padding: 10px;
   margin: 10px;
-  margin-right: 50px;
+  margin-right: 20px;
   list-style-position: inside;
 }
 
@@ -60,8 +58,9 @@ a {
   color: black;
 }
 
-img{
+img {
   border-radius: 50%;
+  max-width: 100%; /* Ensure images don't exceed their container */
 }
 
 .info {
@@ -70,8 +69,24 @@ img{
   color: #999;
 }
 
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    text-align: left;
+    margin: 0;
+  }
 
-/* Style for the information on the right */
+  .header :nth-child(1),
+  .header :nth-child(2),
+  .header :nth-child(3),
+  .header :nth-child(4),
+  .header :nth-child(5) {
+    margin: 10px 0;
+  }
 
-
-
+  .container {
+    margin: auto;
+    padding: 0 15px;
+  }
+}
